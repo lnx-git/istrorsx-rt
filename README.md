@@ -79,6 +79,7 @@ script/visionn_*/    the neural-network inference servers, one directory per mod
 sample/              sample camera frames
 doc/ai/              architecture and rationale, specifications, installation
 doc/kml/             park maps as KML, screenshots, QR codes for the navigation points
+doc/260919_*/        raw GPS logs from every run of Robotour 2026
 _full_launch.sh      start everything
 *_node_run.sh        start one node with the arguments it needs
 ```
