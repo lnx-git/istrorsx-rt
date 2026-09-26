@@ -1,6 +1,7 @@
 # Third-party material in this repository
 
-The source code and documentation here are under the MIT licence (`license/LICENSE`). Three kinds of file
+The MIT licence in `LICENSE` (a copy is in `license/LICENSE`) covers **the source code and
+documentation of this repository only**. Three kinds of file
 are **not** ours to relicense and keep the terms of where they came from. They are listed below, with
 the same note repeated in the directory each of them sits in.
 
