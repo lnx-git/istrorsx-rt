@@ -23,13 +23,3 @@ UTC+2). The rounds ran on the south-east part of Stromovka — the map is
 | `260919_1225_round_2b_gpspipe.log.gz` | 2 | 1 086 | 12:07–12:25 | return to the service area |
 | `260919_1438_round_3_gpspipe.log.gz` | 3 | 2 538 | 12:25–14:39 | off the path during a WrongWay reversal |
 | `260919_1610_round_4_gpspipe.log.gz` | 4 | 1 990 | 15:32–16:10 | trouble in the map; the Jetson shut down on low UPS voltage |
-
-The first file also contains sentences from before the first fix — the module reports `V` (invalid)
-with its default date until it acquires satellites; the fix count above counts only valid (`A`)
-sentences.
-
-Reading one of them:
-
-```bash
-zcat 260919_1034_round_1a_gpspipe.log.gz | head
-```
