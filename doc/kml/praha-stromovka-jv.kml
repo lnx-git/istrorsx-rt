@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><kml xmlns="http://earth.google.com/kml/2.0">"
+<Folder><name>out/navmap-praha-stromovka-jv.kml</name>
+<Style id="style1"><IconStyle><scale>0.5</scale><Icon><href>http://earth.google.com/images/kml-icons/track-directional/track-none.png</href></Icon></IconStyle></Style>
+<Style id="style2"><IconStyle><scale>0.8</scale><color>ff00ff00</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/star.png</href></Icon></IconStyle></Style>
+<Style id="style3"><IconStyle><scale>0.6</scale><color>ff808080</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/forbidden.png</href></Icon></IconStyle></Style>
+<Style id="style4"><IconStyle><scale>0.6</scale><color>ff00ff00</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+<Style id="lstyle1"><LineStyle><color>FFFF0000</color><width>2</width></LineStyle></Style>
+<Style id="lstyle2"><LineStyle><color>FF00FF00</color><width>2</width></LineStyle></Style>
+<Style id="lstyle3"><LineStyle><color>FF0000FF</color><width>2</width></LineStyle></Style>
+<Style id="lstyle4"><LineStyle><color>FF00FFFF</color><width>2</width></LineStyle></Style>
+<Folder><name>navigationPoint</name>
+<Placemark><description>point_idx=3</description><name>E1</name><styleUrl>style4</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4270630,50.1052359</coordinates></Point></Placemark>
+<Placemark><description>point_idx=4</description><name>M6</name><styleUrl>style4</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4217072,50.1048489</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>navMapNode</name>
+<Placemark><description>node_id=252419263</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4230498,50.1059956</coordinates></Point></Placemark>
+<Placemark><description>node_id=252419265</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4231218,50.1058723</coordinates></Point></Placemark>
+<Placemark><description>node_id=252419273</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4276708,50.1051376</coordinates></Point></Placemark>
+<Placemark><description>node_id=275620097</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4211510,50.1054987</coordinates></Point></Placemark>
+<Placemark><description>node_id=275620114</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4269229,50.1049944</coordinates></Point></Placemark>
+<Placemark><description>node_id=275620116</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4291699,50.1042986</coordinates></Point></Placemark>
+<Placemark><description>node_id=297543615</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4297917,50.1041576</coordinates></Point></Placemark>
+<Placemark><description>node_id=329712759</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4215519,50.1051726</coordinates></Point></Placemark>
+<Placemark><description>node_id=329712781</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4217072,50.1048489</coordinates></Point></Placemark>
+<Placemark><description>node_id=329712845</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4193746,50.1040866</coordinates></Point></Placemark>
+<Placemark><description>node_id=388382563</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4236341,50.1038394</coordinates></Point></Placemark>
+<Placemark><description>node_id=388382565</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4222667,50.1039981</coordinates></Point></Placemark>
+<Placemark><description>node_id=388382573</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4220690,50.1044673</coordinates></Point></Placemark>
+<Placemark><description>node_id=388382575</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4219914,50.1044988</coordinates></Point></Placemark>
+<Placemark><description>node_id=388382598</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4256603,50.1046662</coordinates></Point></Placemark>
+<Placemark><description>node_id=388382600</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4260263,50.1045998</coordinates></Point></Placemark>
+<Placemark><description>node_id=388382605</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4284497,50.1042676</coordinates></Point></Placemark>
+<Placemark><description>node_id=388382609</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4286096,50.1038739</coordinates></Point></Placemark>
+<Placemark><description>node_id=388382614</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4280387,50.1046573</coordinates></Point></Placemark>
+<Placemark><description>node_id=388382616</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4242501,50.1063027</coordinates></Point></Placemark>
+<Placemark><description>node_id=388382619</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4269874,50.1053466</coordinates></Point></Placemark>
+<Placemark><description>node_id=558361014</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4247675,50.1063272</coordinates></Point></Placemark>
+<Placemark><description>node_id=558379268</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4270206,50.1056567</coordinates></Point></Placemark>
+<Placemark><description>node_id=558379270</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4278269,50.1058154</coordinates></Point></Placemark>
+<Placemark><description>node_id=558379279</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4263438,50.1059928</coordinates></Point></Placemark>
+<Placemark><description>node_id=558379281</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4273466,50.1059883</coordinates></Point></Placemark>
+<Placemark><description>node_id=1008712303</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4242121,50.1040250</coordinates></Point></Placemark>
+<Placemark><description>node_id=1008712324</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4232563,50.1051225</coordinates></Point></Placemark>
+<Placemark><description>node_id=1010691873</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4257486,50.1062493</coordinates></Point></Placemark>
+<Placemark><description>node_id=1010691884</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4270630,50.1052359</coordinates></Point></Placemark>
+<Placemark><description>node_id=1023770686</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4277968,50.1051469</coordinates></Point></Placemark>
+<Placemark><description>node_id=1286453162</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4279825,50.1052775</coordinates></Point></Placemark>
+<Placemark><description>node_id=1286453181</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4284506,50.1052728</coordinates></Point></Placemark>
+<Placemark><description>node_id=1906596875</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4280044,50.1051560</coordinates></Point></Placemark>
+<Placemark><description>node_id=1914382799</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4244933,50.1038089</coordinates></Point></Placemark>
+<Placemark><description>node_id=2385050034</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4257104,50.1055177</coordinates></Point></Placemark>
+<Placemark><description>node_id=2385050035</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4257634,50.1067218</coordinates></Point></Placemark>
+<Placemark><description>node_id=2385093178</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4211900,50.1054300</coordinates></Point></Placemark>
+<Placemark><description>node_id=2413986455</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4257030,50.1051499</coordinates></Point></Placemark>
+<Placemark><description>node_id=4407938773</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4203189,50.1038565</coordinates></Point></Placemark>
+<Placemark><description>node_id=4407938796</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4289343,50.1050017</coordinates></Point></Placemark>
+<Placemark><description>node_id=4766847780</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4278552,50.1057935</coordinates></Point></Placemark>
+<Placemark><description>node_id=5301037243</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4196506,50.1037836</coordinates></Point></Placemark>
+<Placemark><description>node_id=6909484887</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4220159,50.1048783</coordinates></Point></Placemark>
+<Placemark><description>node_id=6909484890</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4217854,50.1050966</coordinates></Point></Placemark>
+<Placemark><description>node_id=6909484891</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4218923,50.1051779</coordinates></Point></Placemark>
+<Placemark><description>node_id=6909484892</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4217375,50.1050971</coordinates></Point></Placemark>
+<Placemark><description>node_id=6909484894</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4216335,50.1050304</coordinates></Point></Placemark>
+<Placemark><description>node_id=8852424425</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4276575,50.1051715</coordinates></Point></Placemark>
+<Placemark><description>node_id=10597429824</description><name></name><styleUrl>style1</styleUrl><Point><altitudeMode>clampToGround</altitudeMode><coordinates>14.4276654,50.1057286</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>navMapSegment</name>
+<Placemark><name>way_id=23315134</name><styleUrl>lstyle1</styleUrl><LineString id="way23315134"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4230498,50.1059956,0.0,14.4231218,50.1058723,0.0,14.4231673,50.1058442,0.0,14.4237170,50.1057773,0.0,14.4244998,50.1056759,0.0,14.4253183,50.1055629,0.0,14.4257104,50.1055177,0.0,14.4262674,50.1054534,0.0,14.4270630,50.1052359,0.0,14.4271990,50.1051813,0.0,14.4274079,50.1051273,0.0,14.4276708,50.1051376,0.0,14.4277968,50.1051469,0.0,14.4279333,50.1051529,0.0,14.4280044,50.1051560,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=25303589</name><styleUrl>lstyle1</styleUrl><LineString id="way25303589"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4211510,50.1054987,0.0,14.4211900,50.1054300,0.0,14.4212167,50.1053712,0.0,14.4213775,50.1052681,0.0,14.4215519,50.1051726,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=25303590</name><styleUrl>lstyle1</styleUrl><LineString id="way25303590"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4269229,50.1049944,0.0,14.4271337,50.1049454,0.0,14.4277176,50.1047674,0.0,14.4280387,50.1046573,0.0,14.4291699,50.1042986,0.0,14.4294504,50.1042248,0.0,14.4297917,50.1041576,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=33898711</name><styleUrl>lstyle1</styleUrl><LineString id="way33898711"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4256195,50.1035353,0.0,14.4251119,50.1036413,0.0,14.4245754,50.1037372,0.0,14.4240751,50.1038082,0.0,14.4236341,50.1038394,0.0,14.4232401,50.1038206,0.0,14.4228826,50.1038396,0.0,14.4225198,50.1038968,0.0,14.4222667,50.1039981,0.0,14.4221877,50.1040752,0.0,14.4221114,50.1041854,0.0,14.4220484,50.1042763,0.0,14.4220345,50.1043713,0.0,14.4220690,50.1044673,0.0,14.4219914,50.1044988,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=33898715</name><styleUrl>lstyle1</styleUrl><LineString id="way33898715"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4218438,50.1039921,0.0,14.4220091,50.1040116,0.0,14.4222667,50.1039981,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=33898716</name><styleUrl>lstyle1</styleUrl><LineString id="way33898716"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4236341,50.1038394,0.0,14.4237217,50.1038730,0.0,14.4242121,50.1040250,0.0,14.4244763,50.1041776,0.0,14.4248847,50.1044995,0.0,14.4250795,50.1045936,0.0,14.4252784,50.1046428,0.0,14.4254538,50.1046668,0.0,14.4256603,50.1046662,0.0,14.4258709,50.1046382,0.0,14.4259734,50.1046129,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=33898717</name><styleUrl>lstyle1</styleUrl><LineString id="way33898717"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4286096,50.1038739,0.0,14.4286658,50.1039683,0.0,14.4286749,50.1040447,0.0,14.4286524,50.1041361,0.0,14.4285905,50.1041923,0.0,14.4284497,50.1042676,0.0,14.4282786,50.1044013,0.0,14.4281798,50.1045197,0.0,14.4280387,50.1046573,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=33898720</name><styleUrl>lstyle1</styleUrl><LineString id="way33898720"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4242501,50.1063027,0.0,14.4242930,50.1062621,0.0,14.4247675,50.1063272,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=33898726</name><styleUrl>lstyle1</styleUrl><LineString id="way33898726"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4260263,50.1045998,0.0,14.4264369,50.1046696,0.0,14.4267334,50.1048329,0.0,14.4269229,50.1049944,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=43906829</name><styleUrl>lstyle1</styleUrl><LineString id="way43906829"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4247675,50.1063272,0.0,14.4241930,50.1060453,0.0,14.4237746,50.1059126,0.0,14.4234504,50.1059606,0.0,14.4231218,50.1058723,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=43907854</name><styleUrl>lstyle1</styleUrl><LineString id="way43907854"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4277968,50.1051469,0.0,14.4279079,50.1051988,0.0,14.4279825,50.1052775,0.0,14.4280067,50.1052981,0.0,14.4280691,50.1053722,0.0,14.4280876,50.1054448,0.0,14.4280786,50.1055336,0.0,14.4280148,50.1056702,0.0,14.4278552,50.1057935,0.0,14.4278269,50.1058154,0.0,14.4276657,50.1058640,0.0,14.4275155,50.1058708,0.0,14.4273746,50.1058515,0.0,14.4272269,50.1058139,0.0,14.4271086,50.1057472,0.0,14.4270206,50.1056567,0.0,14.4269833,50.1055297,0.0,14.4269874,50.1053466,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=43907855</name><styleUrl>lstyle1</styleUrl><LineString id="way43907855"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4278269,50.1058154,0.0,14.4276847,50.1059027,0.0,14.4275226,50.1059611,0.0,14.4273466,50.1059883,0.0,14.4272470,50.1059376,0.0,14.4271429,50.1058602,0.0,14.4270590,50.1057631,0.0,14.4270206,50.1056567,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=43907856</name><styleUrl>lstyle1</styleUrl><LineString id="way43907856"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4273466,50.1059883,0.0,14.4275711,50.1060658,0.0,14.4279442,50.1061434,0.0,14.4271158,50.1061551,0.0,14.4265778,50.1061267,0.0,14.4263438,50.1059928,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=50914020</name><styleUrl>lstyle1</styleUrl><LineString id="way50914020"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4215519,50.1051726,0.0,14.4218923,50.1051779,0.0,14.4223405,50.1051846,0.0,14.4223447,50.1051093,0.0,14.4232563,50.1051225,0.0,14.4253271,50.1051713,0.0,14.4257030,50.1051499,0.0,14.4260784,50.1051237,0.0,14.4264816,50.1050706,0.0,14.4269229,50.1049944,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=113465850</name><styleUrl>lstyle1</styleUrl><LineString id="way113465850"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4278037,50.1054044,0.0,14.4279825,50.1052775,0.0,14.4281635,50.1052310,0.0,14.4283078,50.1052287,0.0,14.4284506,50.1052728,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=180216039</name><styleUrl>lstyle1</styleUrl><LineString id="way180216039"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4247675,50.1063272,0.0,14.4250538,50.1063572,0.0,14.4253576,50.1063384,0.0,14.4257486,50.1062493,0.0,14.4260228,50.1061448,0.0,14.4263438,50.1059928,0.0,14.4266970,50.1057939,0.0,14.4268340,50.1056827,0.0,14.4269874,50.1053466,0.0,14.4270630,50.1052359,0.0,14.4270076,50.1051086,0.0,14.4269229,50.1049944,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=180216049</name><styleUrl>lstyle1</styleUrl><LineString id="way180216049"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4280044,50.1051560,0.0,14.4279825,50.1052775,0.0,14.4279834,50.1054577,0.0,14.4279740,50.1054680,0.0,14.4279592,50.1054689,0.0,14.4278037,50.1054044,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=180998344</name><styleUrl>lstyle1</styleUrl><LineString id="way180998344"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4218438,50.1039921,0.0,14.4215301,50.1039053,0.0,14.4211726,50.1038663,0.0,14.4203189,50.1038565,0.0,14.4200480,50.1038838,0.0,14.4194448,50.1039972,0.0,14.4193746,50.1040866,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=180998345</name><styleUrl>lstyle1</styleUrl><LineString id="way180998345"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4244933,50.1038089,0.0,14.4242121,50.1040250,0.0,14.4239044,50.1043121,0.0,14.4236876,50.1045383,0.0,14.4235839,50.1046730,0.0,14.4234802,50.1048749,0.0,14.4232563,50.1051225,0.0,14.4230603,50.1053735,0.0,14.4229741,50.1055199,0.0,14.4229792,50.1055971,0.0,14.4231042,50.1057963,0.0,14.4231218,50.1058723,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=229966997</name><styleUrl>lstyle1</styleUrl><LineString id="way229966997"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4256195,50.1035353,0.0,14.4256266,50.1036229,0.0,14.4256775,50.1039414,0.0,14.4256815,50.1041163,0.0,14.4256603,50.1046662,0.0,14.4257030,50.1051499,0.0,14.4257040,50.1051685,0.0,14.4257104,50.1055177,0.0,14.4257486,50.1062493,0.0,14.4257634,50.1067218,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=229972129</name><styleUrl>lstyle1</styleUrl><LineString id="way229972129"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4211900,50.1054300,0.0,14.4231218,50.1058723,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=483930375</name><styleUrl>lstyle1</styleUrl><LineString id="way483930375"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4278552,50.1057935,0.0,14.4277461,50.1057848,0.0,14.4276830,50.1057507,0.0,14.4276654,50.1057286,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=548739738</name><styleUrl>lstyle1</styleUrl><LineString id="way548739738"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4203189,50.1038565,0.0,14.4196506,50.1037836,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=737909240</name><styleUrl>lstyle1</styleUrl><LineString id="way737909240"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4217072,50.1048489,0.0,14.4217953,50.1048700,0.0,14.4219555,50.1048523,0.0,14.4220159,50.1048783,0.0,14.4220029,50.1050993,0.0,14.4217854,50.1050966,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=737909241</name><styleUrl>lstyle1</styleUrl><LineString id="way737909241"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4218923,50.1051779,0.0,14.4217854,50.1050966,0.0,14.4217375,50.1050971,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=737909242</name><styleUrl>lstyle1</styleUrl><LineString id="way737909242"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4215519,50.1051726,0.0,14.4216608,50.1051214,0.0,14.4217375,50.1050971,0.0,14.4216335,50.1050304,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=956523902</name><styleUrl>lstyle1</styleUrl><LineString id="way956523902"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4276708,50.1051376,0.0,14.4276575,50.1051715,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=1374209205</name><styleUrl>lstyle1</styleUrl><LineString id="way1374209205"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4285928,50.1051163,0.0,14.4289343,50.1050017,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=1374209206</name><styleUrl>lstyle1</styleUrl><LineString id="way1374209206"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4280387,50.1046573,0.0,14.4280328,50.1046980,0.0,14.4280187,50.1049230,0.0,14.4280044,50.1051560,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=1374209207</name><styleUrl>lstyle1</styleUrl><LineString id="way1374209207"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4280044,50.1051560,0.0,14.4282456,50.1051623,0.0,14.4285928,50.1051163,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=1416514821</name><styleUrl>lstyle1</styleUrl><LineString id="way1416514821"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4259734,50.1046129,0.0,14.4260263,50.1045998,0.0,14.4260997,50.1045269,0.0,14.4263493,50.1043968,0.0,14.4265910,50.1043105,0.0,14.4272165,50.1042096,0.0,14.4276157,50.1041850,0.0,14.4284497,50.1042676,0.0,14.4286552,50.1042847,0.0,14.4288426,50.1042879,0.0,14.4291699,50.1042986,0.0</coordinates></LineString></Placemark>
+<Placemark><name>way_id=1559408577</name><styleUrl>lstyle1</styleUrl><LineString id="way1559408577"><extrude>0</extrude><tessellate>0</tessellate><altitudeMode>clampToGround</altitudeMode>
+<coordinates>14.4220159,50.1048783,0.0,14.4220889,50.1048120,0.0,14.4220843,50.1047321,0.0,14.4220690,50.1044673,0.0</coordinates></LineString></Placemark>
+</Folder>
+</Folder></kml>

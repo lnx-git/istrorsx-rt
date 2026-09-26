@@ -1,0 +1,42 @@
+2026-08-26 18:31:17,696 INFO [main] ========================================================
+2026-08-26 18:31:17,696 INFO [main] visionn_model::model_init(): msg="load model - start..."
+2026-08-26 18:31:17,906 INFO [main] visionn_model::model_init(): image_size="[384, 512]"
+2026-08-26 18:31:17,906 INFO [main] visionn_model::model_init(): input_tensor_name="input", output_tensor_name="logits"
+2026-08-26 18:31:17,906 INFO [main] visionn_model::model_init(): msg="load model - finished"
+2026-08-26 18:31:18,292 DEBUG [main] visionn_model::model_predict(): dt1=6, dt2=368, dt3=3
+2026-08-26 18:31:18,606 DEBUG [main] visionn_model::model_predict(): dt1=5, dt2=306, dt3=3
+2026-08-26 18:31:18,882 DEBUG [main] visionn_model::model_predict(): dt1=5, dt2=268, dt3=3
+2026-08-26 18:31:19,166 DEBUG [main] visionn_model::model_predict(): dt1=4, dt2=275, dt3=4
+2026-08-26 18:31:19,440 DEBUG [main] visionn_model::model_predict(): dt1=4, dt2=267, dt3=3
+2026-08-26 18:31:19,722 DEBUG [main] visionn_model::model_predict(): dt1=4, dt2=274, dt3=4
+2026-08-26 18:31:20,004 DEBUG [main] visionn_model::model_predict(): dt1=5, dt2=274, dt3=3
+2026-08-26 18:31:20,283 DEBUG [main] visionn_model::model_predict(): dt1=4, dt2=270, dt3=4
+2026-08-26 18:31:20,554 DEBUG [main] visionn_model::model_predict(): dt1=4, dt2=263, dt3=4
+2026-08-26 18:38:27,289 INFO [main] ========================================================
+2026-08-26 18:38:27,289 INFO [main] visionn_model::model_init(): msg="load model - start..."
+2026-08-26 18:38:27,484 INFO [main] visionn_model::model_init(): image_size="[384, 512]"
+2026-08-26 18:38:27,484 INFO [main] visionn_model::model_init(): input_tensor_name="input", output_tensor_name="logits"
+2026-08-26 18:38:27,484 INFO [main] visionn_model::model_init(): msg="load model - finished"
+2026-08-26 18:38:27,864 DEBUG [main] visionn_model::model_predict(): dt1=6, dt2=361, dt3=5
+2026-08-26 18:38:28,178 DEBUG [main] visionn_model::model_predict(): dt1=4, dt2=307, dt3=3
+2026-08-26 18:38:28,453 DEBUG [main] visionn_model::model_predict(): dt1=4, dt2=266, dt3=4
+2026-08-26 18:38:28,724 DEBUG [main] visionn_model::model_predict(): dt1=4, dt2=264, dt3=3
+2026-08-26 18:38:29,004 DEBUG [main] visionn_model::model_predict(): dt1=4, dt2=272, dt3=4
+2026-08-26 18:38:29,278 DEBUG [main] visionn_model::model_predict(): dt1=4, dt2=266, dt3=4
+2026-08-26 18:38:29,553 DEBUG [main] visionn_model::model_predict(): dt1=4, dt2=268, dt3=3
+2026-08-26 18:38:29,828 DEBUG [main] visionn_model::model_predict(): dt1=5, dt2=267, dt3=3
+2026-08-26 18:38:30,104 DEBUG [main] visionn_model::model_predict(): dt1=5, dt2=268, dt3=3
+2026-08-26 18:41:18,013 INFO [main] ========================================================
+2026-08-26 18:41:18,014 INFO [main] visionn_model::model_init(): msg="load model - start..."
+2026-08-26 18:41:18,220 INFO [main] visionn_model::model_init(): image_size="[384, 512]"
+2026-08-26 18:41:18,220 INFO [main] visionn_model::model_init(): input_tensor_name="input", output_tensor_name="logits"
+2026-08-26 18:41:18,220 INFO [main] visionn_model::model_init(): msg="load model - finished"
+2026-08-26 18:41:18,610 DEBUG [main] visionn_model::model_predict(): dt1=5, dt2=373, dt3=4
+2026-08-26 18:41:18,917 DEBUG [main] visionn_model::model_predict(): dt1=5, dt2=298, dt3=3
+2026-08-26 18:41:19,190 DEBUG [main] visionn_model::model_predict(): dt1=4, dt2=265, dt3=4
+2026-08-26 18:41:19,463 DEBUG [main] visionn_model::model_predict(): dt1=4, dt2=266, dt3=3
+2026-08-26 18:41:19,731 DEBUG [main] visionn_model::model_predict(): dt1=5, dt2=260, dt3=3
+2026-08-26 18:41:20,010 DEBUG [main] visionn_model::model_predict(): dt1=5, dt2=271, dt3=3
+2026-08-26 18:41:20,282 DEBUG [main] visionn_model::model_predict(): dt1=5, dt2=264, dt3=3
+2026-08-26 18:41:20,558 DEBUG [main] visionn_model::model_predict(): dt1=5, dt2=268, dt3=3
+2026-08-26 18:41:20,833 DEBUG [main] visionn_model::model_predict(): dt1=4, dt2=267, dt3=3

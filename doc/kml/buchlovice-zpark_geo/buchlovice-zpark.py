@@ -1,0 +1,11 @@
+import pyqrcode   
+#qr = pyqrcode.create('geo:49.0834733,17.3361909')
+#qr.png('buchlovice-zpark_W1.png', scale=18)
+#qr = pyqrcode.create('geo:49.0807325,17.3378971') 
+#qr.png('buchlovice-zpark_S1.png', scale=18)
+#qr = pyqrcode.create('geo:49.0837373,17.3425147')
+#qr.png('buchlovice-zpark_E1.png', scale=18)
+#qr = pyqrcode.create('geo:49.0848958,17.339488')  
+#qr.png('buchlovice-zpark_N1.png', scale=18)
+qr = pyqrcode.create('geo:49.0840141,17.3373570')
+qr.png('buchlovice-zpark_R0.png', scale=18)

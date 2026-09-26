@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+  <!-- Output the log message to system console. -->
+  <appender name="istroConsoleAppender" class="org.apache.log4j.ConsoleAppender">    
+    <param name="Target" value="System.out"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%-5p [%X{threadName}] %c:%m%n"/>
+    </layout>
+  </appender>
+  
+  <!-- Output the log message to log file -->
+  <!-- "rt2026" below must match EVENT_TAG (src/istrobtx/include/event_defs.h)
+       by hand: this is a plain XML file, not something the C preprocessor
+       that substitutes EVENT_TAG everywhere else (save_node.cpp,
+       telemetry_node.cpp) can reach. -->
+  <!-- Plain (non-rolling) appender: every node process independently rotating
+       this same shared filename (previous RollingFileAppender+TimeBasedRollingPolicy
+       setup) raced on the rename at each minute boundary: whichever process
+       rotated last would unlink the others' just-renamed file out from under
+       their still-open fd, silently losing their log output. Now every process
+       just appends forever to this one fixed path; telemetry_node.cpp is the
+       single owner of periodic rotation (see its rotateLog(), "copytruncate"
+       style: copy aside + truncate in place, no rename, no race). -->
+  <appender name="istroFileAppender" class="org.apache.log4j.FileAppender">
+    <param name="file" value="logout/istro_rt2026.log" />
+    <param name="append" value="true" />
+    <layout class="org.apache.log4j.PatternLayout">
+    <param name="ConversionPattern" value="%d %-5p [%X{threadName}] %c:%m%n" />
+    </layout>
+  </appender>
+  
+  <root>
+    <priority value="all" />
+    <appender-ref ref="istroFileAppender"/>
+  </root>
+  
+</log4j:configuration>

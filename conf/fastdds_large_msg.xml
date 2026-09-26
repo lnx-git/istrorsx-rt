@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fast DDS shared-memory sizing for CameraFrame.
+
+     CameraFrame is 640*480*3 (color) + 848*480*2 (depth) = 1735680 B.
+     Fast DDS's default shared-memory segment is 512 KB (549408 B with
+     overhead, as seen in /dev/shm/fastrtps_*), so every frame is 3.3x
+     larger than the window it is pushed through. With RELIABLE QoS the
+     writer then blocks waiting for the reader to drain, which is the
+     ~2 s publisher stall seen on /robot/camera_front_data.
+
+     Use with:
+       export FASTRTPS_DEFAULT_PROFILES_FILE=$PWD/conf/fastdds_large_msg.xml
+     before starting any node. Unset it to go back to the defaults.
+-->
+<dds xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
+    <profiles>
+        <transport_descriptors>
+            <transport_descriptor>
+                <transport_id>shm_large</transport_id>
+                <type>SHM</type>
+                <!-- 8 MB: room for ~4 in-flight CameraFrames per reader,
+                     rather than a third of one. The segment is committed RAM,
+                     not lazily faulted in (measured: a 17152 KB segment shows
+                     17156 KB under du), and every node creates one -- so this
+                     is ~64 MB across a full 8-node system on the Orin Nano's
+                     8 GB, which is shared with the GPU/TensorRT model. 16 MB
+                     would match the depth-10 history exactly but costs 137 MB
+                     for buffering nobody needs at 5 FPS. -->
+                <segment_size>8388608</segment_size>
+                <maxMessageSize>1048576</maxMessageSize>
+            </transport_descriptor>
+        </transport_descriptors>
+
+        <participant profile_name="participant_large_msg" is_default_profile="true">
+            <rtps>
+                <userTransports>
+                    <transport_id>shm_large</transport_id>
+                </userTransports>
+                <!-- Keep the builtin UDP transport too, so anything the SHM
+                     path cannot serve (or a remote peer) still works. -->
+                <useBuiltinTransports>true</useBuiltinTransports>
+            </rtps>
+        </participant>
+    </profiles>
+</dds>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>istrorsx_bringup</name>
+  <version>0.0.0</version>
+  <description>Launch files to bring up the whole istrorsx robot at once -- replaces the legacy main()/loop()'s threads.start(...) orchestration and this project's own per-node *_node_run.sh scripts. No compiled code: install()-only ament_cmake package for launch/.</description>
+  <maintainer email="ubuntu@todo.todo">ubuntu</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>istrorsx_hw</exec_depend>
+  <exec_depend>istrorsx_core</exec_depend>
+  <exec_depend>joy</exec_depend>
+  <exec_depend>ros2launch</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

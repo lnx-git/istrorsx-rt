@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>istrobtx</name>
+  <version>0.0.0</version>
+  <description>Shared legacy scaffold (Config, DataSet, GeoCalc, Logger, Threads, mtime, system) used by both istrorsx_hw and istrorsx_core -- the subset of the legacy istrobtx library identically needed by every node, split out into its own library package.</description>
+  <maintainer email="ubuntu@todo.todo">ubuntu</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>pkg-config</buildtool_depend>
+
+  <depend>liblog4cxx-dev</depend>
+  <depend>libopencv-dev</depend>
+  <depend>libgeographiclib-dev</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -1,0 +1,23 @@
+# Port of legacy navmap_test() (navmap.cpp): load an OSM map and export it as KML + C++ data.
+# A service, not a message: a one-shot operator/tool action with a result to report back.
+# navigation_node hosts it; see doc/ai/01_architecture.md § navigation_node.
+
+# Request: map name without extension, e.g. "navmap-ba-sadjk" -> reads conf/navmap-ba-sadjk.osm
+string map_name
+---
+# Response
+bool   success
+string message       # error description, or "ok"
+string osm_file      # conf/<map_name>.osm
+string kml_file      # out/<map_name>.kml
+string cpp_file      # out/<map_name>.cpp -- navmap_import_data(), paste into navmap_data.cpp
+int32  node_cnt      # nodes/segments loaded from the OSM file
+int32  segment_cnt
+
+# Connectivity of the loaded graph. Anything outside the largest connected component can never be
+# reached by route planning; each such component is also logged with its ids (handleNavMapExport WARN).
+int32   component_cnt          # 1 = the whole graph is connected
+int32   main_node_cnt          # nodes/segments in the largest component
+int32   main_segment_cnt
+int64[] disconnected_way_ids   # OSM way ids of segments outside the largest component
+int64[] disconnected_node_ids  # OSM node ids outside the largest component

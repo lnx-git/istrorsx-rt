@@ -1,0 +1,374 @@
+import os
+import socket
+import sys
+import time
+import cv2
+import numpy as np
+import logging
+from pathlib import Path
+
+HOST = ''
+PORT = 7001
+
+# Same logout/ directory every ROS2 node's log4cxx logging already writes to
+# (workspace root, see doc/ai/04_installation.md) -- so every node's log ends
+# up in one place, resolved relative to this file's own location rather than
+# the process's cwd or a hardcoded home directory (this VM's /home/ubuntu
+# won't match the final Jetson's /home/istrobotics).
+LOGOUT_DIR = Path(__file__).resolve().parent.parent.parent / "logout"
+
+VISIONN_MOCK = False  # True    # for testing purposes only: do not use the model
+
+# ---------------------------------------------------------------------------
+# Inference throttle. VISIONN_MIN_PERIOD is the minimum number of
+# MILLISECONDS between two real model_predict() calls; 0 or unset means no
+# throttle, which is the Jetson/TensorRT case and the behaviour this server
+# has always had. Milliseconds rather than a frame rate: a rate has to be
+# inverted to get the thing actually enforced, and every other period in this
+# project is already an integer millisecond constant (GZIP_PERIOD,
+# ROTATE_PERIOD, VISION_LAG_PERIOD, SAVE_PERIOD_NAVMAP).
+#
+# It exists for CPU/ONNX inference on a dev machine, where one predict takes
+# ~400 ms and pegs a core: vision_node keeps asking at the camera's rate and
+# the box sits at 100%. VISIONN_MIN_PERIOD=500 lets the model run at most
+# twice a second and leaves the CPU room to breathe.
+#
+# Requests arriving inside the interval are NOT dropped on the floor -- the
+# protocol is strictly request/response over one connection and vision_node
+# blocks in recv_imgpr() until an answer arrives, so silence would hang it.
+# They are answered immediately with the previous mask instead: the expensive
+# part is skipped, the client stays healthy, and it simply sees a slightly
+# stale segmentation -- the same staleness it already tolerates while a slow
+# predict is in flight.
+#
+# Deliberately NOT "finish the inference, then sit on the answer": delaying
+# the response would inflate vision_node's own visionn_recv timing and the
+# model_predict() dt that is the only honest measure of NN latency -- and
+# worse, pushing a response past VISION_LAG_PERIOD (2.4 s) trips
+# planner_node's vision liveness watchdog and forces process_stop, which is a
+# functional break rather than just ugly logs.
+#
+#   VISIONN_MIN_PERIOD=500 ./visionn_server_start.sh
+# ---------------------------------------------------------------------------
+try:
+    VISIONN_MIN_PERIOD = int(float(os.environ.get('VISIONN_MIN_PERIOD', '0') or '0'))
+except ValueError:
+    VISIONN_MIN_PERIOD = 0
+if VISIONN_MIN_PERIOD < 0:
+    VISIONN_MIN_PERIOD = 0
+
+pred_t = None      # time.time() of the last real model_predict(), None = never
+pred_skipped = 0   # requests answered from the previous mask since the last one
+
+VISIONN_RECV_LEN  = 2048
+VISIONN_RECV2_LEN  = 102400
+VISIONN_CMD_LEN = 17
+VISIONN_CMD_HELLO = '{"VISIONN_HELLO":'
+VISIONN_CMD_IMPRQ = '{"VISIONN_IMPRQ":'
+
+logger = None
+#logging._warn_preinit_stderr = 0
+
+### logger ###
+
+logger_stdout = None
+logger_stderr = None
+
+# https://stackoverflow.com/questions/19425736/how-to-redirect-stdout-and-stderr-to-logger-in-python
+#class LoggerWriter:
+#    def __init__(self, level):
+#        # self.level is really like using log.debug(message)
+#        # at least in my case
+#        self.level = level
+#
+#    def write(self, message):
+#        # if statement reduces the amount of newlines that are
+#        # printed to the logger
+#        if message != '\n':
+#            self.level(message)
+#
+#    def flush(self):
+#        # create a flush method so things can be flushed when
+#        # the system wants to. Not sure if simply 'printing'
+#        # sys.stderr is the correct way to do it, but it seemed
+#        # to work properly for me.
+#        self.level(sys.stderr)
+
+def logger_init(name, filename):
+    log = logging.getLogger(name)
+    log.setLevel(logging.DEBUG)
+
+    handler = logging.FileHandler(filename, mode='a', encoding=None, delay=False)
+    handler.setLevel(logging.DEBUG)
+
+    formatter = logging.Formatter('%(asctime)s %(levelname)s [%(name)s] %(message)s')
+    handler.setFormatter(formatter)
+
+    log.addHandler(handler)
+    log.info('========================================================');
+
+    # redirect stdout/stderr to log file - not working with tensorflow
+    logger_stdout = sys.stdout
+    logger_stderr = sys.stderr
+    #sys.stdout = LoggerWriter(log.debug)
+    #sys.stderr = LoggerWriter(log.warning)
+    return log
+
+def logger_close():
+    sys.stdout = logger_stdout
+    sys.stderr = logger_stderr
+
+### mtime ###
+
+def mtime_begin():
+    return int(time.time() * 1000)
+
+def mtime_delta(t):
+    # return time difference in milliseconds
+    return int(mtime_begin() - t)
+
+def mtime_delta2(t1, t2):
+    return int(t2 - t1)
+
+def mtime_end(ss, t):
+    logger.debug('visionn_server::mtime(): m="' + ss + '", dt=' + str(mtime_delta(t)))
+
+
+### sock ###
+
+def sock_listen(host, port):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    logger.debug('visionn_server::sock_listen(): msg="socket created..."')
+
+    try:
+        s.bind((host, port))
+    except socket.error as msg:
+        logger.error('visionn_server::sock_listen(): msg="bind failed..."')
+        sys.exit()
+
+    logger.debug('visionn_server::sock_listen(): msg="socket bind complete...", host="' + host + '", port=' + str(port))
+
+    # Start listening on socket
+    s.listen()
+    logger.debug('visionn_server::sock_listen(): msg="socket now listening..."')
+    return s
+
+def sock_recv_skip(conn, chr):
+    while True:
+        chunk = conn.recv(1)
+        if chunk == b'':
+            logger.error('visionn_server::sock_recv_skip(): msg="error1!"')
+            return -1
+        if chunk == chr:
+            return 0
+
+def sock_recv_head(conn, msglen):
+    if sock_recv_skip(conn, b'{') < 0:
+        logger.error('visionn_server::sock_recv_head(): msg="error1!"')
+        return b''
+    chunks = [b'{']
+    bytes_recd = 1
+    while bytes_recd < msglen:
+        chunk = conn.recv(min(msglen - bytes_recd, VISIONN_RECV_LEN))
+        if chunk == b'':
+            logger.error('visionn_server::sock_recv_head(): msg="error2!"')
+            return b''
+        chunks.append(chunk)
+        bytes_recd = bytes_recd + len(chunk)
+    return b''.join(chunks)
+
+def sock_recv_img(conn):
+    t0 = mtime_begin()
+    if sock_recv_skip(conn, b'[') < 0:
+        logger.error('visionn_server::sock_recv_img(): msg="error1!"')
+        return b''
+    chunks = []
+    bytes_recd = 0
+    msglen = 7
+    while bytes_recd < msglen:
+        chunk = conn.recv(min(msglen - bytes_recd, VISIONN_RECV_LEN))
+        if chunk == b'':
+            logger.error('visionn_server::sock_recv_img(): msg="error2!"')
+            return b''
+        chunks.append(chunk)
+        bytes_recd = bytes_recd + len(chunk)
+    ss = b''.join(chunks)
+    buflen = int(ss.decode('UTF-8'))
+    #print('buflen: {}'.format(buflen))
+    if (buflen < 0) or (buflen > 1999999):
+        logger.error('visionn_server::sock_recv_img(): msg="error3!"')
+        return b''
+
+    chunk = conn.recv(2)
+    if chunk == b'':
+        logger.error('visionn_server::sock_recv_img(): msg="error4!"')
+        return b''
+
+    t1 = mtime_begin()
+    chunks = []
+    bytes_recd = 0
+    while bytes_recd < buflen:
+        chunk = conn.recv(min(buflen - bytes_recd, VISIONN_RECV2_LEN))
+        if chunk == b'':
+            logger.error('visionn_server::sock_recv_img(): msg="error5!"')
+            return b''
+        chunks.append(chunk)
+        bytes_recd = bytes_recd + len(chunk)
+
+    t2 = mtime_begin()
+    buf0 = b''.join(chunks)
+    #buf = np.fromstring(buf0, dtype='uint8')
+    buf = np.frombuffer(buf0, dtype='uint8')    #fromstring(buf0, dtype='uint8')
+
+    img = cv2.imdecode(buf, cv2.IMREAD_COLOR)    #cv2.CV_LOAD_IMAGE_COLOR)
+
+    t3 = mtime_begin()
+    #cv2.imwrite('testing_image.png', img)
+    sock_recv_skip(conn, b'}')
+
+    logger.debug('visionn_server::sock_recv_img(): buflen=' + str(buflen) + ', dt1=' + str(mtime_delta2(t0, t1)) + ', dt2=' + str(mtime_delta2(t1, t2)) + ', dt3=' + str(mtime_delta2(t2, t3)) + ', dt4=' + str(mtime_delta(t3)))
+    return img
+
+def sock_send_hello(conn):
+    resp = '{"VISIONN_HELLO":"server"}\n'
+    conn.sendall(resp.encode('UTF-8'))
+
+def sock_send_imprs(conn, pred):
+    t0 = mtime_begin()
+    #print("pred.shape: {}".format(pred.shape))    # pred.shape = (480, 640, 1)
+
+    #buf = cv2.imencode('.png', pred, [cv2.IMWRITE_PNG_COMPRESSION, 0])[1].tostring()
+    #buf = cv2.imencode('.bmp', pred)[1].tostring()
+    buf = cv2.imencode('.bmp', pred)[1].tobytes()    #.tostring()
+
+    t1 = mtime_begin()
+    buflen = len(buf);
+
+    resp1 = '{"VISIONN_IMPRS":[' + '{:07d}'.format(buflen) + ',"'
+    resp2 = '"]}\n'
+    #print(resp1 + resp2)
+    # One sendall, not three: three writes give Nagle three chances to sit on the
+    # last small segment. vision_node's send_imgpr() was changed the same way
+    # (istrobtx/visionn.cpp) -- the old three-write version is still there,
+    # commented out, for the same reason.
+    conn.sendall(resp1.encode('UTF-8') + buf + resp2.encode('UTF-8'))
+
+    logger.debug('visionn_server::sock_send_imprs(): buflen=' + str(buflen) + ', dt1=' + str(mtime_delta2(t0, t1)) + ', dt2=' + str(mtime_delta(t1)))
+
+### process ###
+
+def process_cmd(conn):
+    global pred, pred_t, pred_skipped
+
+    t = mtime_begin()
+    cmd0 = sock_recv_head(conn, VISIONN_CMD_LEN)
+    if cmd0 == b'':
+        return -1
+    mtime_end('process_cmd.wait', t)
+    cmd = cmd0.decode('UTF-8')
+    #print('recv: {}'.format(cmd.replace("\n","").replace("\r","")))
+
+    t2 = mtime_begin()
+    if cmd == VISIONN_CMD_HELLO:
+        #logger.info('visionn_server::process_cmd(): msg="HELLO request start"')
+        sock_recv_skip(conn, b'}')
+        logger.info('visionn_server::process_cmd(): msg="HELLO request received", dt=' + str(mtime_delta(t2)))
+        sock_send_hello(conn)
+        logger.info('visionn_server::process_cmd(): msg="HELLO response sent"')
+    elif cmd == VISIONN_CMD_IMPRQ:
+        #print('imprq')
+        logger.info('visionn_server::process_cmd(): msg="IMPRQ request start"')
+        img = sock_recv_img(conn)
+        logger.info('visionn_server::process_cmd(): msg="IMPRQ request received", dt=' + str(mtime_delta(t2)))
+        if not VISIONN_MOCK:
+            # Throttle: run the model only if enough time has passed since the
+            # last real inference. Never skip the first one -- there would be
+            # no previous mask to answer with. See VISIONN_MIN_PERIOD above
+            # why the request is answered anyway rather than dropped.
+            now = time.time()
+            skip = (VISIONN_MIN_PERIOD > 0 and pred_t is not None
+                    and (now - pred_t) * 1000.0 < VISIONN_MIN_PERIOD)
+            if skip:
+                pred_skipped += 1
+            else:
+                t3 = mtime_begin()
+                pred = visionn_model.model_predict(img)
+                #cv2.imwrite('img_output/testing_mask.png', pred)
+                logger.info('visionn_server::process_cmd(): msg="IMPRQ model_predict() finished", dt=' + str(mtime_delta(t3))
+                    + (', throttled_since_last=' + str(pred_skipped) if VISIONN_MIN_PERIOD > 0 else ''))
+                pred_t = now
+                pred_skipped = 0
+        t4 = mtime_begin()
+        sock_send_imprs(conn, pred)
+        logger.info('visionn_server::process_cmd(): msg="IMPRQ response sent", dt=' + str(mtime_delta(t4)))
+    else:
+        logger.error('visionn_server::process_cmd(): msg="error: unknown command!"')
+        return -1
+    return 0
+
+def process_conn(s):
+    logger.info('visionn_server::process_conn(): msg="accepting conections..."')
+    conn, addr = s.accept()
+    # Without TCP_NODELAY, Nagle holds the small trailer of a response until the
+    # client ACKs the image bytes, and the client (vision_node) has nothing to
+    # send back -- so its delayed-ACK timer fires first. Measured on the
+    # 2026-09-17 drive: 12 % of answers reached vision_node 40-45 ms late while
+    # the server itself had answered in 22 ms. vision_node's own socket has set
+    # this since the port (istrobtx/visionn.cpp connect_nnserver()).
+    conn.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+    logger.info('visionn_server::process_conn(): msg="connection accepted", host="' + addr[0] + '", port=' + str(addr[1]))
+
+    try:
+        while True:
+            if process_cmd(conn) < 0:
+                break
+
+    except Exception as e:
+        logger.exception('visionn_server::process_conn(): msg="exception: ' + str(e) + '"')
+    finally:
+        conn.close()
+        logger.info('visionn_server::process_conn(): msg="connection closed..."')
+
+### main ###
+
+logger = logger_init('main', str(LOGOUT_DIR / 'visionn_server.log'))
+
+# import visionn_model
+if not VISIONN_MOCK:
+    print('import visionn_model - start')
+    logger.info('visionn_server::main(): msg="import visionn_model - start"')
+    import visionn_model
+    print('import visionn_model - finished')
+    logger.info('visionn_server::main(): msg="import visionn_model - finished"')
+
+    logger.info('visionn_server::main(): msg="visionn_model.model_init() - start..."')
+    t = mtime_begin()
+    visionn_model.model_init(logger)
+    logger.info('visionn_server::main(): msg="visionn_model.model_init() - finished", dt=' + str(mtime_delta(t)))
+
+# VISIONN_MOCK
+if VISIONN_MOCK:
+    logger.info('visionn_server::main(): msg="MOCK VISIONN implementation, DEBUG ONLY!!"');
+
+    pred = cv2.imread('img_output/testing_mask.png', cv2.IMREAD_GRAYSCALE)    # pred.shape = (480, 640)
+    pred = np.expand_dims(pred, axis=2)                            # pred.shape = (480, 640, 1)
+    #print(pred)
+
+if VISIONN_MIN_PERIOD > 0:
+    logger.info('visionn_server::main(): msg="inference throttled", min_period_ms=' + str(VISIONN_MIN_PERIOD))
+    print('inference throttled: at least {} ms between model_predict() calls'.format(VISIONN_MIN_PERIOD))
+else:
+    logger.info('visionn_server::main(): msg="inference not throttled", min_period_ms=0')
+
+s = sock_listen(HOST, PORT)
+
+try:
+    while True:
+        process_conn(s)
+
+except:
+    e = sys.exc_info()[0]
+    logger.exception('visionn_server::main(): msg="exception: ' + str(e) + '"')
+finally:
+    logger.info('visionn_server::main(): msg="application exit"')
+    logger_close()

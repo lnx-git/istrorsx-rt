@@ -1,0 +1,38 @@
+# A service, not a topic -- deliberate, narrow exception to this project's
+# "messages, not services" convention (see doc/ai/01_architecture.md's
+# Notes section and doc/ai/05_migration_guide.md's "Cross-Node Access to
+# Complex/Large Internal State"). planner_node hosts this; save_node calls
+# it only when it has independently decided to render+save the wmodel debug
+# images (its own equivalent of legacy save_thread's write_wmodel/
+# SAVE_PERIOD_WMGRIF gating) -- restoring legacy's pull-based
+# threads.checkData() semantics instead of planner_node pushing on its own
+# schedule. planner_node never calls WMGrid::drawGrid()/drawGridFull()
+# itself -- legacy keeps those exclusive to save_thread, out of
+# process_thread's real-time loop, and that split stays 1:1 here too.
+
+# Request: empty -- "give me the current wmodel state", nothing to parameterize.
+---
+# Response: raw WMGrid/WorldModel state (wmodel.h, istrorsx_core) at the
+# moment of the call. save_node reconstructs its own WorldModel instance
+# from this and draws locally.
+
+# WMGrid::g, WMGRID_HEIGHT x WMGRID_WIDTH (2001x2001), one byte per cell --
+# same flat cv::Mat-serialization convention as CameraFrame.msg (width /
+# height / cv_type / step / data).
+int32   grid_width
+int32   grid_height
+int32   grid_cv_type
+int32   grid_step
+uint8[] grid_data
+
+float32 grid_x0   # WMGrid's own grid-origin tracking (recenter())
+float32 grid_y0
+
+int64   image_number     # WorldModel::image_number -- the processing tick that last updated this grid
+float32 last_x0          # WorldModel::last_x0/y0/alfa -- robot pose at that last update
+float32 last_y0
+float32 last_alfa
+int32   last_ref
+int32   last_angle
+int32   last_angle_min
+int32   last_angle_max
